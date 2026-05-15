@@ -16,9 +16,9 @@ const StartYourJourney = () => {
         <Link href={'/destinations'}>
           <Button
             variant="tertiary"
-            className="rounded-none bg-[#FFFFFF] hover:bg-gray-300"
+            className="rounded-none bg-[#FFFFFF] hover:bg-gray-300 flex gap-4 py-6"
           >
-            BOOK YOUR TRIP TODAY <FaArrowRightLong />
+            BOOK YOUR TRIP TODAY  <FaArrowRightLong />
           </Button>
         </Link>
       </div>

@@ -24,17 +24,17 @@ const MyBookingPage = async () => {
   });
   const bookings = await res.json();
 
-  if (!user) {
-    return (
-      <div className="w-full px-30 py-10">
-        <h1 className="text-6xl mb-4 text-[#0C0B0B]">My Bookings</h1>
-        <div className="flex flex-col gap-3 shadow-sm justify-center items-center text-center py-20">
-          <Columns2 size={100} className="text-gray-200"/>
-          <p className="text-[#6C696D] text-xl">Please log in to view your bookings.</p>
-        </div>
-      </div>
-    );
-  }
+  // if (!bookings) {
+  //   return (
+  //     <div className="w-full px-30 py-10">
+  //       <h1 className="text-6xl mb-4 text-[#0C0B0B]">My Bookings</h1>
+  //       <div className="flex flex-col gap-3 shadow-sm justify-center items-center text-center py-20">
+  //         <Columns2 size={100} className="text-gray-200"/>
+  //         <p className="text-[#6C696D] text-xl">Please click on <strong>Destinations</strong>make some booking to view your bookings.</p>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="w-full px-30 py-10">

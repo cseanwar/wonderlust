@@ -1,61 +1,52 @@
 "use client";
 
-import { RefreshCcw, AlertCircle, Home } from "lucide-react";
-import Link from "next/link"; 
+import { Button } from "@heroui/react";
+import { AlertTriangle, RefreshCw, ArrowLeft } from "lucide-react";
+import Link from "next/link";
 
 const ErrorPage = ({ error, reset }) => {
   return (
-    <div className="min-h-screen relative overflow-hidden bg-linear-to-br from-slate-950 via-red-950 to-slate-900 flex items-center justify-center px-6">
+    <div className="min-h-screen flex items-center justify-center px-6">
+      <div className="text-center max-w-md">
 
-      {/* Background glow effects */}
-      <div className="absolute top-20 left-20 h-72 w-72 rounded-full bg-red-500/20 blur-3xl animate-pulse" />
-      <div className="absolute bottom-20 right-20 h-72 w-72 rounded-full bg-orange-500/20 blur-3xl animate-pulse" />
-
-      <div className="relative max-w-xl w-full rounded-3xl backdrop-blur-xl bg-white/10 border border-white/10 shadow-2xl p-10 md:p-14 text-center">
-
-        {/* Error icon */}
-        <div className="mx-auto w-fit p-5 rounded-full bg-red-500/10 border border-red-400/20 mb-6">
-          <AlertCircle className="h-12 w-12 text-red-400" />
+        {/* Icon */}
+        <div className="flex justify-center mb-6">
+          <div className="bg-red-50 p-5 rounded-full">
+            <AlertTriangle size={48} className="text-red-400" />
+          </div>
         </div>
 
-        {/* Error code */}
-        <h1 className="text-6xl md:text-8xl font-extrabold bg-linear-to-r from-red-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent">
-          Oops!
-        </h1>
-
-        <h2 className="mt-4 text-2xl md:text-3xl text-white font-bold">
+        {/* Heading */}
+        <h1 className="text-4xl font-semibold text-[#0C0B0B] mb-3">
           Something went wrong
-        </h2>
-
-        <p className="mt-4 text-slate-300 leading-relaxed">
+        </h1>
+        <p className="text-[#6C696D] text-lg mb-2">
           An unexpected error occurred while loading this page.
-          Try again or return to the homepage.
         </p>
 
-        {/* Optional error message in development */}
-        {process.env.NODE_ENV === "development" && error?.message && (
-          <div className="mt-5 rounded-xl bg-black/30 border border-red-500/20 p-4 text-left text-sm text-red-300 overflow-auto">
+        {/* Error message (dev helper) */}
+        {error?.message && (
+          <p className="text-sm text-red-400 bg-red-50 px-4 py-2 rounded mb-8 font-mono break-all">
             {error.message}
-          </div>
+          </p>
         )}
 
         {/* Actions */}
-        <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-
-          <button
-            onClick={() => reset()}
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-linear-to-r from-red-500 to-orange-500 text-white font-semibold hover:scale-105 transition-all duration-300"
+        <div className="flex justify-center gap-3 mt-6">
+          <Button
+            variant="outline"
+            className="rounded-none"
+            onPress={reset}
           >
-            <RefreshCcw size={18} />
+            <RefreshCw size={15} />
             Try Again
-          </button>
+          </Button>
 
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-white/20 bg-white/5 text-white hover:bg-white/10 transition"
-          >
-            <Home size={18} />
-            Go Home
+          <Link href="/">
+            <Button className="rounded-none bg-[#15A1BF]">
+              <ArrowLeft size={15} />
+              Back to Home
+            </Button>
           </Link>
         </div>
       </div>

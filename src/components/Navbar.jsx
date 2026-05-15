@@ -17,7 +17,7 @@ const Navbar = () => {
   return (
     <div className="bg-white py-5">
       <nav className="flex items-center justify-between container mx-auto">
-        <ul className="flex gap-3">
+        <ul className="flex gap-8">
           <li>
             <Link href={"/"}>Home</Link>
           </li>
@@ -42,7 +42,7 @@ const Navbar = () => {
           />
         </div>
 
-        <ul className="flex items-center gap-3">
+        <ul className="flex items-center gap-8">
           <li>
             <Link href={"/profile"}>Profile</Link>
           </li>

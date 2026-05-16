@@ -24,7 +24,7 @@ const AddDestination = () => {
     console.log(destination);
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/destination`,
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/destinations`,
       {
         method: "POST",
         headers: {

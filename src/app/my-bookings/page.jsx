@@ -16,15 +16,57 @@ const MyBookingPage = async () => {
   });
 
   const user = session?.user;
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/booking/${user?.id}`,
-    {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    },
-  );
-  const bookings = await res.json();
+
+  if (!user) {
+    return (
+      <div className="w-full px-30 py-10">
+        <h1 className="text-6xl mb-4 text-[#0C0B0B]">My Bookings</h1>
+        <p className="text-red-500 text-xl">
+          Please log in to view your bookings.
+        </p>
+      </div>
+    );
+  }
+
+  let bookings = [];
+  try {
+    const res = await fetch(`${process.env.API_URL}/booking/${user.id}`, {
+      headers: { authorization: `Bearer ${token}` },
+      cache: "no-store",
+    });
+
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    bookings = await res.json();
+  } catch (err) {
+    console.error("Failed to fetch bookings:", err);
+    return (
+      <div className="w-full px-30 py-10">
+        <h1 className="text-6xl mb-4 text-[#0C0B0B]">My Bookings</h1>
+        <p className="text-red-500 text-xl">
+          Failed to load bookings. Please try again later.
+        </p>
+      </div>
+    );
+  }
+
+  // const session = await auth.api.getSession({
+  //   headers: await headers(),
+  // });
+
+  // const { token } = await auth.api.getToken({
+  //   headers: await headers(),
+  // });
+
+  // const user = session?.user;
+  // const res = await fetch(
+  //   `${process.env.NEXT_PUBLIC_SERVER_URL}/booking/${user?.id}`,
+  //   {
+  //     headers: {
+  //       authorization: `Bearer ${token}`,
+  //     },
+  //   },
+  // );
+  // const bookings = await res.json();
 
   return (
     <div className="w-full px-30 py-10">

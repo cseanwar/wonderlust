@@ -38,7 +38,7 @@ const LoginPage = () => {
 
     if (error) {
       // toast
-      toast.error("Login failed");
+      toast.error("Login failed!!! Email or password is not correct");
     }
   };
 

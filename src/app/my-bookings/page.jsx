@@ -20,7 +20,6 @@ const MyBookingPage = async () => {
     headers: {
       authorization: `Bearer ${token}`
     },
-    cache: "no-store",
   });
   const bookings = await res.json();
 

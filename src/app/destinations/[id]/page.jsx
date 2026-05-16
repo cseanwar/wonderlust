@@ -20,7 +20,6 @@ const DestinationDetailsPage = async ({ params }) => {
     headers: {
       authorization: `Bearer ${token}`
     },
-    cache: "no-store",
   });
   const destination = await res.json();
 

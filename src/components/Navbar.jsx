@@ -5,6 +5,7 @@ import { Avatar, Button } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import NavLink from "./NavLink";
 
 const Navbar = () => {
   const { data: session } = authClient.useSession();
@@ -19,17 +20,17 @@ const Navbar = () => {
       <nav className="flex items-center justify-between container mx-auto">
         <ul className="flex gap-8">
           <li>
-            <Link href={"/"}>Home</Link>
+            <NavLink href={"/"}>Home</NavLink>
           </li>
           <li>
-            <Link href={"/destinations"}>Destinations</Link>
+            <NavLink href={"/destinations"}>Destinations</NavLink>
           </li>
           <li>
-            <Link href={"/my-bookings"}>My Bookings</Link>
+            <NavLink href={"/my-bookings"}>My Bookings</NavLink>
           </li>
 
           <li>
-            <Link href={"/add-destination"}>Add Destination</Link>
+            <NavLink href={"/add-destination"}>Add Destination</NavLink>
           </li>
         </ul>
 
@@ -44,7 +45,7 @@ const Navbar = () => {
 
         <ul className="flex items-center gap-8">
           <li>
-            <Link href={"/profile"}>Profile</Link>
+            <NavLink href={"/profile"}>Profile</NavLink>
           </li>
 
           {user ? (
@@ -72,10 +73,10 @@ const Navbar = () => {
           ) : (
             <>
               <li>
-                <Link href={"/login"}>Login</Link>
+                <NavLink href={"/login"}>Login</NavLink>
               </li>
               <li>
-                <Link href={"/signup"}>Sign Up</Link>
+                <NavLink href={"/signup"}>Sign Up</NavLink>
               </li>
             </>
           )}

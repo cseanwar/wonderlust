@@ -43,7 +43,10 @@ const BookingCard = ({ destination }) => {
 
     const data = await res.json();
 
-    toast.success("You booked successfully!");
+    if (data) {
+      toast.success("You have booked successfully!");
+      redirect("/my-bookings");
+    }
   };
 
   return (
@@ -65,7 +68,7 @@ const BookingCard = ({ destination }) => {
 
       <Separator className="my-3" />
 
-      <Link href={"/destinations"}>
+      <Link href={"/my-bookings"}>
         <Button
           onClick={handleBooking}
           className={"w-full rounded-none bg-[#15A1BF] py-4 font-semibold"}

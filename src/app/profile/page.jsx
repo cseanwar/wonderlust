@@ -2,7 +2,6 @@
 
 import { UpdateUserModal } from "@/components/UpdateUserModal";
 import { authClient } from "@/lib/auth-client";
-import { Button } from "@heroui/react";
 import {
   Plane,
   Globe,

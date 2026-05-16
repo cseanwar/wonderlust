@@ -207,14 +207,6 @@ const AddDestination = () => {
               </Button>
             </Link>
           </div>
-
-          {/* <Button
-            type="submit"
-            variant="outline"
-            className=" rounded-none w-full bg-cyan-500 text-white"
-          >
-            Add Destination
-          </Button> */}
         </form>
       </Card>
     </div>

@@ -19,7 +19,8 @@ const DestinationDetailsPage = async ({ params }) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/destinations/${id}`, {
     headers: {
       authorization: `Bearer ${token}`
-    }
+    },
+    cache: "no-store",
   });
   const destination = await res.json();
 

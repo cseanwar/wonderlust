@@ -23,7 +23,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (!user?.id) return;
-    fetch(`http://localhost:5000/booking/${user.id}`)
+    fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/booking/${user.id}`)
       .then((res) => res.json())
       .then((data) => setBookings(data))
       .catch((err) => console.error("Failed to fetch bookings:", err));
@@ -132,9 +132,7 @@ const ProfilePage = () => {
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-[#6C696D]">Nationality</span>
-              <span className="font-semibold text-[#0C0B0B]">
-                Bangladesh
-              </span>
+              <span className="font-semibold text-[#0C0B0B]">Bangladesh</span>
             </div>
           </div>
 

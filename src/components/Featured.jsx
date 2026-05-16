@@ -4,7 +4,7 @@ import Link from "next/link";
 import { FaArrowRightLong } from "react-icons/fa6";
 
 const Featured = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/featured`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/featured`)
   const destinations = await res.json();
   console.log(destinations);
   return (

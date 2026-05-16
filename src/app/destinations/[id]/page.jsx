@@ -16,11 +16,14 @@ const DestinationDetailsPage = async ({ params }) => {
     headers: await headers(),
   });
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/destinations/${id}`, {
-    headers: {
-      authorization: `Bearer ${token}`
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/destination/${id}`,
+    {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
-  });
+  );
   const destination = await res.json();
 
   const { imageUrl, price, destinationName, duration, country, description } =

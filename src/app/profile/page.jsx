@@ -9,7 +9,6 @@ import {
   DollarSign,
   MapPin,
   Camera,
-  Pencil,
 } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -28,42 +27,34 @@ const ProfilePage = () => {
       .catch((err) => console.error("Failed to fetch bookings:", err));
   }, [user?.id]);
 
-  // ── Derived stats from bookings ──
   const totalBookings = bookings.length;
-  const totalSpent = bookings.reduce(
-    (sum, b) => sum + (Number(b.price) ?? 0),
-    0,
-  );
-  const countriesVisited = new Set(
-    bookings.map((b) => b.country).filter(Boolean),
-  ).size;
-  const upcomingTrips = bookings.filter(
-    (b) => new Date(b.departureDate) > new Date(),
-  ).length;
+  const totalSpent = bookings.reduce((sum, b) => sum + (Number(b.price) ?? 0), 0);
+  const countriesVisited = new Set(bookings.map((b) => b.country).filter(Boolean)).size;
+  const upcomingTrips = bookings.filter((b) => new Date(b.departureDate) > new Date()).length;
 
   const stats = [
     {
       label: "Total Bookings",
       value: totalBookings,
-      icon: <Plane size={20} className="text-[#15A1BF]" />,
+      icon: <Plane size={18} className="text-[#15A1BF]" />,
       iconBg: "bg-cyan-100",
     },
     {
       label: "Countries Visited",
       value: countriesVisited,
-      icon: <Globe size={20} className="text-emerald-500" />,
+      icon: <Globe size={18} className="text-emerald-500" />,
       iconBg: "bg-emerald-100",
     },
     {
       label: "Upcoming Trips",
       value: upcomingTrips,
-      icon: <TrendingUp size={20} className="text-orange-500" />,
+      icon: <TrendingUp size={18} className="text-orange-500" />,
       iconBg: "bg-orange-100",
     },
     {
       label: "Total Spent",
       value: `$${totalSpent.toLocaleString()}`,
-      icon: <DollarSign size={20} className="text-purple-500" />,
+      icon: <DollarSign size={18} className="text-purple-500" />,
       iconBg: "bg-purple-100",
     },
   ];
@@ -77,20 +68,26 @@ const ProfilePage = () => {
     : "—";
 
   return (
-    <div className="container mx-auto py-20">
+    <div className="w-full px-4 sm:px-6 md:px-10 lg:px-16 xl:max-w-7xl xl:mx-auto py-10 md:py-16 lg:py-20">
+
       {/* Page header */}
-      <h1 className="text-5xl text-[#0C0B0B] mb-2">My Profile</h1>
-      <p className="text-[#6C696D] text-base mb-10">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl text-[#0C0B0B] mb-2">
+        My Profile
+      </h1>
+      <p className="text-[#6C696D] text-sm md:text-base mb-8 md:mb-10">
         Manage your account settings and travel preferences
       </p>
 
-      <div className="flex gap-6 items-start">
+      {/* Layout — stacked on mobile, side by side on lg */}
+      <div className="flex flex-col lg:flex-row gap-6 items-start">
+
         {/* ── Left card ── */}
-        <div className="shadow-md p-6 w-80 shrink-0">
+        <div className="shadow-md p-5 md:p-6 w-full lg:w-72 xl:w-80 shrink-0">
+
           {/* Avatar */}
           <div className="flex justify-center mb-5">
             <div className="relative">
-              <div className="relative w-28 h-28 rounded-full overflow-hidden border-2 border-gray-100">
+              <div className="relative w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-2 border-gray-100">
                 {user?.image ? (
                   <Image
                     src={user.image.trimStart()}
@@ -111,8 +108,8 @@ const ProfilePage = () => {
           </div>
 
           {/* Name & location */}
-          <div className="text-center mb-6">
-            <h2 className="text-xl font-semibold text-[#0C0B0B]">
+          <div className="text-center mb-5">
+            <h2 className="text-lg md:text-xl font-semibold text-[#0C0B0B]">
               {user?.name ?? "—"}
             </h2>
             <p className="flex items-center justify-center gap-1 text-[#6C696D] text-sm mt-1">
@@ -122,12 +119,10 @@ const ProfilePage = () => {
           </div>
 
           {/* Meta rows */}
-          <div className="border-t border-gray-100 pt-5 space-y-3 mb-6">
+          <div className="border-t border-gray-100 pt-4 space-y-3 mb-5">
             <div className="flex justify-between text-sm">
               <span className="text-[#6C696D]">Member since</span>
-              <span className="font-semibold text-[#0C0B0B]">
-                {memberSince}
-              </span>
+              <span className="font-semibold text-[#0C0B0B]">{memberSince}</span>
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-[#6C696D]">Nationality</span>
@@ -139,24 +134,27 @@ const ProfilePage = () => {
         </div>
 
         {/* ── Right: Travel Statistics ── */}
-        <div className="flex-1">
-          <h3 className="text-2xl font-semibold text-[#0C0B0B] mb-5">
+        <div className="flex-1 w-full">
+          <h3 className="text-xl md:text-2xl font-semibold text-[#0C0B0B] mb-4 md:mb-5">
             Travel Statistics
           </h3>
-          <div className="grid grid-cols-2 gap-4">
+
+          <div className="grid grid-cols-2 gap-3 md:gap-6">
             {stats.map((stat) => (
               <div
                 key={stat.label}
-                className="border border-gray-200 p-6 flex justify-between items-start"
+                className="border border-gray-200 p-4 md:p-6 flex justify-between items-start"
               >
                 <div>
-                  <p className="text-[#6C696D] text-sm mb-2">{stat.label}</p>
-                  <p className="text-3xl font-semibold text-[#0C0B0B]">
+                  <p className="text-[#6C696D] text-xs md:text-sm mb-1 md:mb-2">
+                    {stat.label}
+                  </p>
+                  <p className="text-2xl md:text-3xl font-semibold text-[#0C0B0B]">
                     {stat.value}
                   </p>
                 </div>
                 <div
-                  className={`w-11 h-11 rounded-full ${stat.iconBg} flex items-center justify-center`}
+                  className={`w-9 h-9 md:w-11 md:h-11 rounded-full ${stat.iconBg} flex items-center justify-center shrink-0`}
                 >
                   {stat.icon}
                 </div>

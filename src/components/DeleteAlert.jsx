@@ -13,9 +13,7 @@ export function DeleteAlert({ destination }) {
       `${process.env.NEXT_PUBLIC_SERVER_URL}/destinations/${_id}`,
       {
         method: "DELETE",
-        headers: {
-          "content-type": "application/json",
-        },
+        headers: { "content-type": "application/json" },
         credentials: "include",
       },
     );
@@ -26,39 +24,51 @@ export function DeleteAlert({ destination }) {
 
   return (
     <AlertDialog>
+      {/* Trigger button */}
       <Button
-        className={"text-[#EF4444] border-[#EF4444] rounded-none text-base"}
+        className="text-[#EF4444] border-[#EF4444] rounded-none text-sm md:text-base"
         variant="outline"
       >
         <TrashBin /> Delete
       </Button>
+
       <AlertDialog.Backdrop>
         <AlertDialog.Container>
-          <AlertDialog.Dialog className="sm:max-w-100">
+          <AlertDialog.Dialog className="w-[90vw] sm:w-[80vw] md:max-w-md p-5 sm:p-6 md:p-8">
             <AlertDialog.CloseTrigger />
-            <AlertDialog.Header>
+
+            {/* Header */}
+            <AlertDialog.Header className="pb-3">
               <AlertDialog.Icon status="danger" />
-              <AlertDialog.Heading>
+              <AlertDialog.Heading className="text-base sm:text-lg md:text-xl text-[#0C0B0B]">
                 Delete destination permanently?
               </AlertDialog.Heading>
             </AlertDialog.Header>
-            <AlertDialog.Body>
-              <p>
+
+            {/* Body */}
+            <AlertDialog.Body className="py-3">
+              <p className="text-sm md:text-base text-[#6C696D] leading-relaxed">
                 Are you sure you want to delete{" "}
-                <strong>{destinationName}</strong> ? This action cannot be
-                undone and will permanently remove this travel package from the
-                system.
+                <strong className="text-[#0C0B0B]">{destinationName}</strong>?
+                This action cannot be undone and will permanently remove this
+                travel package from the system.
               </p>
             </AlertDialog.Body>
-            <AlertDialog.Footer>
-              <Button slot="close" variant="outline" className="rounded-none">
+
+            {/* Footer */}
+            <AlertDialog.Footer className="flex flex-col sm:flex-row gap-3 pt-4">
+              <Button
+                slot="close"
+                variant="outline"
+                className="rounded-none text-sm md:text-base w-full sm:w-auto order-2 sm:order-1"
+              >
                 Cancel
               </Button>
               <Button
                 onClick={handleDelete}
                 slot="close"
                 variant="danger"
-                className="rounded-none"
+                className="rounded-none text-sm md:text-base w-full sm:w-auto order-1 sm:order-2"
               >
                 <FaRegTrashAlt /> Delete Package
               </Button>

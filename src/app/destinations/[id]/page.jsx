@@ -19,9 +19,7 @@ const DestinationDetailsPage = async ({ params }) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/destinations/${id}`,
     {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
+      headers: { authorization: `Bearer ${token}` },
     },
   );
   const destination = await res.json();
@@ -30,70 +28,70 @@ const DestinationDetailsPage = async ({ params }) => {
     destination;
 
   return (
-    <div className="container mx-auto py-10">
-      <div className="flex justify-between items-center">
-        <div>
-          <Link href={"/destinations"}>
-            <Button
-              variant="ghost"
-              className="text-[#6C696D] font-normal text-xl rounded-sm"
-            >
-              <BiArrowBack />
-              Back to Destinations
-            </Button>
-          </Link>
-        </div>
-        <div className="flex  items-center gap-4 justify-end mt-5 mb-3">
+    <div className="w-full px-4 lg:px-0 lg:container lg:mx-auto py-8 md:py-10">
+
+      {/* Top bar */}
+      <div className="flex flex-wrap justify-between items-center gap-3 mb-4">
+        <Link href="/destinations">
+          <Button
+            variant="ghost"
+            className="text-[#6C696D] font-normal text-base md:text-xl rounded-sm px-0"
+          >
+            <BiArrowBack />
+            Back to Destinations
+          </Button>
+        </Link>
+        <div className="flex items-center gap-3">
           <EditModal destination={destination} />
           <DeleteAlert destination={destination} />
         </div>
       </div>
 
+      {/* Hero image */}
       {imageUrl?.trimStart() && (
-        <Image
-          className="w-full h-135 object-cover"
-          alt={destinationName}
-          src={imageUrl.trimStart()}
-          height={500}
-          width={800}
-        />
+        <div className="relative w-full h-52 sm:h-72 md:h-96 lg:h-[500px] mb-4">
+          <Image
+            className="object-cover"
+            alt={destinationName}
+            src={imageUrl.trimStart()}
+            fill
+            sizes="100vw"
+          />
+        </div>
       )}
-      {/* <Image
-        className="w-full h-135 object-cover"
-        alt={destinationName}
-        src={imageUrl}
-        height={500}
-        width={800}
-      /> */}
 
-      <Separator className="my-6" />
+      <Separator className="my-4 md:my-6" />
 
-      <div className="flex justify-between">
-        <div className="max-w-4xl">
-          <div className="flex items-center gap-2 text-[#6C696D] text-base mb-4">
-            <LuMapPin /> <span>{country}</span>
-          </div>
-          <div className="flex justify-between">
-            <div>
-              <div>
-                <h2 className="text-6xl text-[#0C0B0B] mb-4">
-                  {destinationName}
-                </h2>
-              </div>
-              <div className="flex gap-2 items-center text-[#0C0B0B] text-lg">
-                <PiCalendarBold /> {duration}
-              </div>
-            </div>
+      {/* Content — stacks on mobile, side by side on lg */}
+      <div className="flex flex-col lg:flex-row lg:justify-between gap-8">
+
+        {/* Left: details */}
+        <div className="w-full lg:max-w-3xl">
+          <div className="flex items-center gap-2 text-[#6C696D] text-sm md:text-base mb-4">
+            <LuMapPin className="shrink-0" />
+            <span>{country}</span>
           </div>
 
-          <h1 className="mt-10 text-[#0C0B0B] text-[32px] mb-1">Overview</h1>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#0C0B0B] leading-tight">
+            {destinationName}
+          </h2>
 
-          <p className="text-lg text-[#6C696D] leading-relaxed text-justify">
+          <div className="flex gap-2 items-center text-[#0C0B0B] text-base md:text-lg mb-10">
+            <PiCalendarBold className="shrink-0" /> {duration}
+          </div>
+
+          <h3 className="text-[#0C0B0B] text-2xl md:text-[32px] mb-2">
+            Overview
+          </h3>
+          <p className="text-base md:text-lg text-[#6C696D] leading-relaxed text-justify">
             {description}
           </p>
         </div>
 
-        <BookingCard destination={destination} />
+        {/* Right: booking card */}
+        <div className="w-full lg:w-80 shrink-0">
+          <BookingCard destination={destination} />
+        </div>
       </div>
     </div>
   );

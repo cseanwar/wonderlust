@@ -21,68 +21,82 @@ const AddDestination = () => {
     const formData = new FormData(e.currentTarget);
     const destination = Object.fromEntries(formData.entries());
 
-    console.log(destination);
-
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/destinations`,
       {
         method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
+        headers: { "content-type": "application/json" },
         body: JSON.stringify(destination),
       },
     );
 
     const data = await res.json();
-    toast.success("Destination added successfully", data);
+    toast.success("Destination added successfully");
   };
+
   return (
-    <div className="py-20 max-w-7xl mx-auto">
-      <h1 className="text-[#0C0B0B] text-6xl font-semibold pb-10">
+    <div className="w-full max-w-[100vw] overflow-x-hidden px-4 sm:px-6 md:px-10 lg:px-16 xl:max-w-7xl xl:mx-auto py-10 md:py-16 lg:py-20">
+      <h1 className="text-[#0C0B0B] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold pb-6 md:pb-10 break-words">
         Add New Travel Package
       </h1>
-      <Card>
-        <form onSubmit={onSubmit} className="p-10 space-y-8 w-3xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+      {/* Replace Card with plain div to avoid HeroUI fixed widths */}
+      <div className="w-full border border-gray-200 shadow-sm overflow-hidden">
+        <form
+          onSubmit={onSubmit}
+          className="p-5 sm:p-6 md:p-8 lg:p-10 space-y-6 md:space-y-8 w-full"
+          style={{ width: "100%" }}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
             {/* Destination Name */}
-            <div className="md:col-span-2">
-              <TextField name="destinationName" isRequired>
-                <Label className="text-[#0C0B0B] text-lg font-medium">
+            <div className="col-span-1 md:col-span-2 w-full">
+              <TextField
+                name="destinationName"
+                isRequired
+                style={{ width: "100%" }}
+              >
+                <Label className="text-[#0C0B0B] text-base md:text-lg font-medium">
                   Destination Name
                 </Label>
                 <Input
                   placeholder="Bali Paradise"
-                  className="bg-[#F8FAFC] text-[#6C696D] font-normal text-lg rounded-sm"
+                  className="bg-[#F8FAFC] text-[#6C696D] rounded-sm"
+                  style={{ width: "100%", minWidth: "0" }}
                 />
                 <FieldError />
               </TextField>
             </div>
 
             {/* Country */}
-            <TextField name="country" isRequired>
-              <Label className="text-[#0C0B0B] text-lg font-medium">
-                Country
-              </Label>
-              <Input
-                placeholder="Indonesia"
-                className="bg-[#F8FAFC] text-[#6C696D] font-normal text-lg rounded-sm"
-              />
-              <FieldError />
-            </TextField>
+            <div className="col-span-1 w-full">
+              <TextField name="country" isRequired style={{ width: "100%" }}>
+                <Label className="text-[#0C0B0B] text-base md:text-lg font-medium">
+                  Country
+                </Label>
+                <Input
+                  placeholder="Indonesia"
+                  className="bg-[#F8FAFC] text-[#6C696D] rounded-sm"
+                  style={{ width: "100%", minWidth: "0" }}
+                />
+                <FieldError />
+              </TextField>
+            </div>
 
-            {/* Category - Updated Select Component */}
-            <div>
+            {/* Category */}
+            <div className="col-span-1 w-full">
               <Select
                 name="category"
                 isRequired
-                className="bg-[#F8FAFC] text-[#6C696D] font-normal text-lg rounded-sm"
+                style={{ width: "100%" }}
                 placeholder="Select category"
               >
-                <Label className="text-[#0C0B0B] text-lg font-medium">
+                <Label className="text-[#0C0B0B] text-base md:text-lg font-medium">
                   Category
                 </Label>
-                <Select.Trigger className="bg-[#F8FAFC] text-[#6C696D] font-normal text-lg rounded-sm">
+                <Select.Trigger
+                  className="bg-[#F8FAFC] text-[#6C696D] rounded-sm"
+                  style={{ width: "100%", minWidth: "0" }}
+                >
                   <Select.Value />
                   <Select.Indicator />
                 </Select.Trigger>
@@ -118,68 +132,91 @@ const AddDestination = () => {
             </div>
 
             {/* Price */}
-            <TextField name="price" type="number" isRequired>
-              <Label className="text-[#0C0B0B] text-lg font-medium">
-                Price (USD)
-              </Label>
-              <Input
+            <div className="col-span-1 w-full">
+              <TextField
+                name="price"
                 type="number"
-                placeholder="e.g., 1299"
-                className="bg-[#F8FAFC] text-[#6C696D] font-normal text-lg rounded-sm"
-              />
-              <FieldError />
-            </TextField>
-
-            {/* Duration */}
-            <TextField name="duration" isRequired>
-              <Label className="text-[#0C0B0B] text-lg font-medium">
-                Duration
-              </Label>
-              <Input
-                placeholder="e.g., 7 Days/6 Nights"
-                className="bg-[#F8FAFC] text-[#6C696D] font-normal text-lg rounded-sm"
-              />
-              <FieldError />
-            </TextField>
-
-            {/* Departure Date */}
-            <div className="md:col-span-2">
-              <TextField name="departureDate" type="date" isRequired>
-                <Label className="text-[#0C0B0B] text-lg font-medium">
-                  Departure Date
+                isRequired
+                style={{ width: "100%" }}
+              >
+                <Label className="text-[#0C0B0B] text-base md:text-lg font-medium">
+                  Price (USD)
                 </Label>
                 <Input
-                  type="date"
-                  className="bg-[#F8FAFC] text-[#6C696D] font-normal text-lg rounded-sm"
+                  type="number"
+                  placeholder="e.g., 1299"
+                  className="bg-[#F8FAFC] text-[#6C696D] rounded-sm"
+                  style={{ width: "100%", minWidth: "0" }}
                 />
                 <FieldError />
               </TextField>
             </div>
 
-            {/* Image URL - Removed preview */}
-            <div className="md:col-span-2">
-              <TextField name="imageUrl" isRequired>
-                <Label className="text-[#0C0B0B] text-lg font-medium">
+            {/* Duration */}
+            <div className="col-span-1 w-full">
+              <TextField name="duration" isRequired style={{ width: "100%" }}>
+                <Label className="text-[#0C0B0B] text-base md:text-lg font-medium">
+                  Duration
+                </Label>
+                <Input
+                  placeholder="e.g., 7 Days/6 Nights"
+                  className="bg-[#F8FAFC] text-[#6C696D] rounded-sm"
+                  style={{ width: "100%", minWidth: "0" }}
+                />
+                <FieldError />
+              </TextField>
+            </div>
+
+            {/* Departure Date */}
+            <div className="col-span-1 md:col-span-2 w-full">
+              <TextField
+                name="departureDate"
+                type="date"
+                isRequired
+                style={{ width: "100%" }}
+              >
+                <Label className="text-[#0C0B0B] text-base md:text-lg font-medium">
+                  Departure Date
+                </Label>
+                <Input
+                  type="date"
+                  className="bg-[#F8FAFC] text-[#6C696D] rounded-sm"
+                  style={{ width: "100%", minWidth: "0" }}
+                />
+                <FieldError />
+              </TextField>
+            </div>
+
+            {/* Image URL */}
+            <div className="col-span-1 md:col-span-2 w-full">
+              <TextField name="imageUrl" isRequired style={{ width: "100%" }}>
+                <Label className="text-[#0C0B0B] text-base md:text-lg font-medium">
                   Image URL
                 </Label>
                 <Input
                   type="url"
-                  placeholder="https://example.com/bali-paradise.jpg"
-                  className="bg-[#F8FAFC] text-[#6C696D] font-normal text-lg rounded-sm"
+                  placeholder="https://example.com/image.jpg"
+                  className="bg-[#F8FAFC] text-[#6C696D] rounded-sm"
+                  style={{ width: "100%", minWidth: "0" }}
                 />
                 <FieldError />
               </TextField>
             </div>
 
             {/* Description */}
-            <div className="md:col-span-2">
-              <TextField name="description" isRequired>
-                <Label className="text-[#0C0B0B] text-lg font-medium">
+            <div className="col-span-1 md:col-span-2 w-full">
+              <TextField
+                name="description"
+                isRequired
+                style={{ width: "100%" }}
+              >
+                <Label className="text-[#0C0B0B] text-base md:text-lg font-medium">
                   Description
                 </Label>
                 <TextArea
                   placeholder="Describe the travel experience..."
-                  className="bg-[#F8FAFC] text-[#6C696D] font-normal text-lg rounded-sm"
+                  className="bg-[#F8FAFC] text-[#6C696D] rounded-sm min-h-32"
+                  style={{ width: "100%", minWidth: "0" }}
                 />
                 <FieldError />
               </TextField>
@@ -187,28 +224,23 @@ const AddDestination = () => {
           </div>
 
           {/* Buttons */}
-
-          <div className="flex justify-end gap-4">
+          <div className="flex flex-col sm:flex-row justify-end gap-3 pt-2">
             <Button
-              type="cancel"
-              slot="close"
+              type="button"
               variant="danger"
-              className="bg-[#FFFFFF] text-[#EF4444] border-2 border-[#EF4444] text-base rounded-none"
+              className="bg-white text-[#EF4444] border-2 border-[#EF4444] text-sm md:text-base rounded-none w-full sm:w-auto"
             >
               <FaRegTrashAlt /> Cancel
             </Button>
-            <Link href={"/destination"}>
-              <Button
-                type="submit"
-                slot="close"
-                className="bg-[#15A1BF] text-[#FFFFFF] text-base rounded-none"
-              >
-                <LiaSaveSolid /> Add Travel Package
-              </Button>
-            </Link>
+            <Button
+              type="submit"
+              className="bg-[#15A1BF] text-white text-sm md:text-base rounded-none w-full sm:w-auto"
+            >
+              <LiaSaveSolid /> Add Travel Package
+            </Button>
           </div>
         </form>
-      </Card>
+      </div>
     </div>
   );
 };

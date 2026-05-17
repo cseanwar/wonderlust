@@ -4,38 +4,57 @@ import { LuMapPin } from "react-icons/lu";
 import Link from "next/link";
 import { RiArrowRightUpLine } from "react-icons/ri";
 import { PiCalendarBold } from "react-icons/pi";
+
 const DestinationCard = ({ destination }) => {
   const { _id, imageUrl, price, destinationName, duration, country } = destination;
 
   return (
-    <div className="shadow-sm">
-      <Image
-        className="h-57.75 mb-6 object-cover"
-        alt={destinationName}
-        src={imageUrl?.trimStart()}
-        height={400}
-        width={400}
-      />
+    <div className="shadow-sm w-full overflow-hidden">
+      {/* Image */}
+      <div className="relative w-full h-48 sm:h-52 md:h-56 lg:h-60">
+        <Image
+          className="object-cover"
+          alt={destinationName}
+          src={imageUrl?.trimStart()}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        />
+      </div>
 
-      <div className="px-2">
-        <div className="flex items-center gap-1 text-[#6C696D] text-base mb-3">
-          <LuMapPin /> <span>{country}</span>
+      {/* Content */}
+      <div className="px-3 pt-4 pb-2">
+        <div className="flex items-center gap-1 text-[#6C696D] text-sm md:text-base mb-2">
+          <LuMapPin className="shrink-0" />
+          <span className="truncate">{country}</span>
         </div>
-        <div className="flex justify-between mb-4">
-          <div>
-            <div className="mb-3">
-              <h2 className="text-2xl font-medium text-[#0C0B0B]">{destinationName}</h2>
-            </div>
-            <div className="flex gap-1 items-center text-[#6C696D] font-medium text-base">
-              <PiCalendarBold /> {duration}
+
+        <div className="flex justify-between items-start gap-2 mb-3">
+          <div className="min-w-0 flex-1">
+            <h2 className="text-lg md:text-xl font-medium text-[#0C0B0B] truncate">
+              {destinationName}
+            </h2>
+            <div className="flex gap-1 items-center text-[#6C696D] text-sm mt-1">
+              <PiCalendarBold className="shrink-0" />
+              <span>{duration}</span>
             </div>
           </div>
 
-          <div>
-            <h3 className="text-2xl font-medium text-[#0C0B0B]">${price}<span className="text-[#6C696D] text-sm">/person</span></h3>
+          <div className="shrink-0 text-right">
+            <h3 className="text-lg md:text-xl font-medium text-[#0C0B0B]">
+              ${price}
+              <span className="text-[#6C696D] text-xs">/person</span>
+            </h3>
           </div>
         </div>
-        <Link href={`/destinations/${_id}`}><Button variant="ghost" className={'text-[#15A1BF] font-medium text-base mb-2 rounded-sm'}>Book Now <RiArrowRightUpLine /></Button></Link>
+
+        <Link href={`/destinations/${_id}`}>
+          <Button
+            variant="ghost"
+            className="text-[#15A1BF] font-medium text-sm md:text-base mb-1 rounded-sm px-0"
+          >
+            Book Now <RiArrowRightUpLine />
+          </Button>
+        </Link>
       </div>
     </div>
   );

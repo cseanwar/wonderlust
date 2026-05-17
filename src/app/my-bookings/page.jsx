@@ -104,7 +104,7 @@ const MyBookingPage = async () => {
                         size={13}
                         className="text-gray-400 mt-0.5 shrink-0"
                       />
-                      <span className="break-words">
+                      <span className="wrap-break-word">
                         Departure:{" "}
                         {new Date(booking.departureDate).toLocaleDateString(
                           "en-US",

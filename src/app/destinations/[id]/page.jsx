@@ -49,7 +49,7 @@ const DestinationDetailsPage = async ({ params }) => {
 
       {/* Hero image */}
       {imageUrl?.trimStart() && (
-        <div className="relative w-full h-52 sm:h-72 md:h-96 lg:h-[500px] mb-4">
+        <div className="relative w-full h-52 sm:h-72 md:h-96 lg:h-125 mb-4">
           <Image
             className="object-cover"
             alt={destinationName}

@@ -36,7 +36,7 @@ const AddDestination = () => {
 
   return (
     <div className="w-full max-w-[100vw] overflow-x-hidden px-4 sm:px-6 md:px-10 lg:px-16 xl:max-w-7xl xl:mx-auto py-10 md:py-16 lg:py-20">
-      <h1 className="text-[#0C0B0B] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold pb-6 md:pb-10 break-words">
+      <h1 className="text-[#0C0B0B] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold pb-6 md:pb-10 wrap-break-word">
         Add New Travel Package
       </h1>
 

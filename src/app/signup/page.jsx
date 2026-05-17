@@ -56,10 +56,10 @@ const SignUpPage = () => {
     <div className="min-h-screen w-full flex flex-col items-center justify-center bg-white py-10 px-4 overflow-x-hidden">
       {/* Header */}
       <div className="text-center mb-6 w-full max-w-lg px-2">
-        <h1 className="text-4xl md:text-5xl text-[#0C0B0B] mb-2 break-words">
+        <h1 className="text-4xl md:text-5xl text-[#0C0B0B] mb-2 wrap-break-word">
           Create Account
         </h1>
-        <p className="text-[#6C696D] text-base md:text-lg break-words">
+        <p className="text-[#6C696D] text-base md:text-lg wrap-break-word">
           Start your adventure with Wanderlust
         </p>
       </div>
